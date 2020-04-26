@@ -5,4 +5,11 @@ $mediaLaptop: 961px;
 
 // Typography
 $font-stack: Avenir, Helvetica, Arial, sans-serif;
-$primary-color: #333;
+$primary-color: #555454;
+
+// Mixins
+@mixin flex-center () {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

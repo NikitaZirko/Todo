@@ -1,7 +1,14 @@
 <template>
-  <div class="home">
-    <font-awesome-icon icon="plus-circle" size="5x" />
-    <TodoList v-for="item in 6" :key="item.message" msg="Добавьте вашу заметку" />
+  <div class="todolists">
+    <h1 class="todolist__title">
+      <font-awesome-icon class="ic-note" :icon="[ 'fas', 'sticky-note' ]" size="xl" />
+      <br>Мои заметки
+    </h1>
+    <p class="todolist__sup-title">Ваш персональный<br>помощник</p>
+    <button class="add-todolist">
+      <font-awesome-icon class="ic-add" icon="plus-circle" size="5x" />
+    </button>
+    <TodoList v-for="item in 5" :key="item.id" msg="" />
   </div>
 </template>
 

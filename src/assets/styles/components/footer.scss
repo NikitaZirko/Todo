@@ -1,0 +1,22 @@
+@import "../variables";
+
+.footer {
+  max-width: 960px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 60px 0 30px 0;
+  @include flex-center ();
+  flex-direction: column;
+
+  .social {
+    padding: 60px 0 20px 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .social__item {
+      padding: 0 20px;
+    }
+  }
+}
