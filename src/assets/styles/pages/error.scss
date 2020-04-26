@@ -1,0 +1,20 @@
+.error {
+  margin: 0 auto;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  .error__title {
+    margin: 0;
+    text-align: center;
+    font-size: 15rem;
+    color: #b3b3b3;
+  }
+  .error__link {
+    text-align: center;
+    font-size: 2rem;
+    color: #b3b3b3;
+    text-decoration: underline;
+  }
+}

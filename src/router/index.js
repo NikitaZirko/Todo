@@ -1,10 +1,15 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import NotFoundComponent from "../views/NotFoundComponent.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "*",
+    component: NotFoundComponent
+  },
   {
     path: "/",
     name: "Home",
