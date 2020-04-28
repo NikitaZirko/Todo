@@ -1,4 +1,5 @@
 <template>
+
   <div class="todolist" v-if="allTodo || 0">
     <input type="text" class="todolist__title" :value="allTodo.title" disabled="disabled">
     <div class="todo" v-for="(i, idx) in allTodo.todo.slice(0, 2)" :key="i.id">
@@ -24,24 +25,15 @@
 
 <script>
 export default {
-  name: "TodoList",
-  props: {
-    allTodo: Object
-  },
+  name: "Modal",
   methods: {
-    delTodolist() {
-      this.$store.dispatch("del", this.allTodo.id);
-    }
-  },
-  computed: {
-    changeTodoLists() {
-      return console.log("sdsds")
-      /* return this.$store.getters["getTodoLists"]; */
+    open() {
+
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
- @import "../assets/styles/components/todolist.scss";
+ @import "../assets/styles/components/modal.scss";
 </style>

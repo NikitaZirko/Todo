@@ -9,5 +9,5 @@
 </script>>
 
 <style lang="scss" scoped>
- @import '../assets/styles/pages/note.scss';
+ @import "../assets/styles/pages/note.scss";
 </style>
