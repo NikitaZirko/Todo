@@ -32,9 +32,8 @@
         <router-link tag="button" class="edit-todolist" to="/note">
           <font-awesome-icon class="ic-edit" icon="edit" size="2x" />
         </router-link>
-        <router-link tag="button" class="del-todolist" to="#">
+        <router-link tag="button" class="del-todolist" to="#" @click.native.prevent="showModal = true">
           <font-awesome-icon
-            @click.prevent="modalOpen = true"
             class="ic-del"
             icon="times"
             size="2x"
@@ -44,14 +43,10 @@
     </div>
     <div class="todolist empty" v-else></div>
 
-    <app-modal v-show="modalOpen" @click.self.native="modalOpen = false">
-        <template v-slot:title>
-          ВЫ ДЕСТВИТЕЛЬНО ХОТИТЕ <span class="col-red">УДАЛИТЬ</span> ЗАМЕТКУ?
-        </template>
-        <template v-slot:buttons>
-          <button class="button-agree">Да</button>
-          <button class="button-disagree">Нет</button><!-- @click.self.native="modalOpen = false" -->
-        </template>
+    <app-modal v-show="showModal" @modalConfirm="changeTodolist($event)" @click.self.native="showModal = false">
+      <template v-slot:title>
+        ВЫ ДЕСТВИТЕЛЬНО ХОТИТЕ <span class="col-red">УДАЛИТЬ</span> ЗАМЕТКУ?
+      </template>
     </app-modal>
   </div>
 </template>
@@ -61,16 +56,20 @@ export default {
   name: "TodoList",
   data() {
     return {
-      modalOpen: false
+      showModal: false
     };
   },
   props: {
     allTodo: Object
   },
   methods: {
-    delTodolist() {
-      this.modalOpen = true;
-      /* this.$store.dispatch("del", this.allTodo.id); */
+    changeTodolist(ev) {
+      if (ev === "yes") {
+        this.$store.dispatch("del", this.allTodo.id);
+        this.showModal = false;
+      } else if (ev === "no") {
+        this.showModal = false;
+      }
     }
   },
   computed: {
