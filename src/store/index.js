@@ -49,9 +49,8 @@ export default new Vuex.Store({
       state.todoLists = todoLists;
     },
     REMOVETODOLIST(state, id) {
-      console.log(id-1)
       Vue.delete(state.todoLists, id-1);
-      //state.todoLists.splice((id-1), 1)
+      //or state.todoLists.splice((id-1), 1)
     }
   },
   actions: {

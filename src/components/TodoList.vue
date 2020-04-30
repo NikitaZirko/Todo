@@ -29,10 +29,10 @@
       </div>
 
       <div class="todolist__buttons">
-        <router-link tag="button" class="edit-todolist" to="/note">
+        <router-link @click.native.prevent="clickTodo({name:'edit', id:allTodo.id})" tag="button" class="edit-todolist" to="/note">
           <font-awesome-icon class="ic-edit" icon="edit" size="2x" />
         </router-link>
-        <router-link tag="button" class="del-todolist" to="#" @click.native.prevent="showModal = true">
+        <router-link @click.native.prevent="clickTodo({name:'del', id:allTodo.id})" tag="button" class="del-todolist" to="#">
           <font-awesome-icon
             class="ic-del"
             icon="times"
@@ -42,40 +42,18 @@
       </div>
     </div>
     <div class="todolist empty" v-else></div>
-
-    <app-modal v-show="showModal" @modalConfirm="changeTodolist($event)" @click.self.native="showModal = false">
-      <template v-slot:title>
-        ВЫ ДЕСТВИТЕЛЬНО ХОТИТЕ <span class="col-red">УДАЛИТЬ</span> ЗАМЕТКУ?
-      </template>
-    </app-modal>
   </div>
 </template>
 
 <script>
 export default {
   name: "TodoList",
-  data() {
-    return {
-      showModal: false
-    };
-  },
   props: {
     allTodo: Object
   },
   methods: {
-    changeTodolist(ev) {
-      if (ev === "yes") {
-        this.$store.dispatch("del", this.allTodo.id);
-        this.showModal = false;
-      } else if (ev === "no") {
-        this.showModal = false;
-      }
-    }
-  },
-  computed: {
-    changeTodoLists() {
-      return console.log("sdsds");
-      /* return this.$store.getters["getTodoLists"]; */
+    clickTodo(ev) {
+      this.$emit("clickTodo", ev);
     }
   }
 };
@@ -83,5 +61,4 @@ export default {
 
 <style lang="scss" scoped>
 @import "../assets/styles/components/todolist.scss";
-@import "../assets/styles/components/modal.scss";
 </style>

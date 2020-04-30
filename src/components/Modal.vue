@@ -6,8 +6,8 @@
           <slot name="title"></slot>
         </h1>
         <div class="modal__buttons">
-          <button @click="modalConfirm('yes')" class="button-agree">Да</button>
-          <button @click="modalConfirm('no')" class="button-disagree">Нет</button>
+          <button @click="clickModal('yes')" class="button-agree">Да</button>
+          <button @click="clickModal('no')" class="button-disagree">Нет</button>
         </div>
       </div>
     </div>
@@ -18,8 +18,8 @@
 export default {
   name: "app-modal",
   methods: {
-    modalConfirm(ev) {
-      this.$emit("modalConfirm", ev);
+    clickModal(ev) {
+      this.$emit("clickModal", ev);
     }
   }
 };
