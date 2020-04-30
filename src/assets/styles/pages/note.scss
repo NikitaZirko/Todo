@@ -1,5 +1,13 @@
 @import "../variables";
 
+.note {
+  @include flex-center ();
+  flex-direction: column;
+  .note__title {
+    margin: 140px 0 80px;
+  }
+}
+
 .col-red {
   color: $select;
 }

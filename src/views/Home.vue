@@ -15,7 +15,7 @@
         <font-awesome-icon class="ic-add" icon="plus-circle" size="5x" />
       </router-link>
       <template v-for="(i, idx) in getTodoListsLength">
-        <todoList :allTodo="getTodoLists[idx]" :i="i" :key="i.id" @clickTodo="clickTodo($event)" />
+        <todoLists :allTodo="getTodoLists[idx]" :i="i" :key="i.id" @clickTodo="clickTodo($event)" />
       </template>
     </div>
     <app-modal v-show="showModal" @clickModal="clickModal($event)" @click.self.native="showModal = false">
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import TodoList from "@/components/TodoList.vue";
+import TodoLists from "@/components/TodoLists.vue";
 
 export default {
   name: "home",
@@ -38,17 +38,17 @@ export default {
     };
   },
   components: {
-    TodoList
+    TodoLists
   },
   methods: {
     clickTodo(ev) {
+      this.idTodoList = ev.id;
       if (ev.name === "del") {
         this.showModal = true;
       } else if (ev.name === "edit") {
         console.log("пупу")
         // дополнить передачу id в vuex
       }
-      this.idTodoList = ev.id;
     },
     clickModal(ev) {
       if (ev === "yes") {
@@ -64,9 +64,10 @@ export default {
       return this.$store.getters["getTodoLists"];
     },
     getTodoListsLength() {
-      // add 5 sceleton-blocks if > todolists
+      // if todolists > 5 add sceleton-blocks
       if (this.$store.getters["getTodoLists"].length < 5) {
         return 5;
+      // if todolists > 5 return Todolist length
       } else {
         return this.$store.getters["getTodoLists"].length;
       }

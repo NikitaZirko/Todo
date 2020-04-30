@@ -1,60 +1,57 @@
 <template>
-  <div>
-    <div class="todolist" v-if="allTodo || 0">
+  <div class="todolist">
+    <input
+      type="text"
+      class="todolist__title"
+      :value="todo.title"
+      disabled="disabled"
+    />
+    <div
+      class="todo"
+      v-for="(i, idx) in todo.todo.slice(0, 2)"
+      :key="i.id"
+    >
+      <label class="checkbox-label">
+        <input
+          class="checkbox-input"
+          type="checkbox"
+          disabled="disabled"
+          :checked="todo.todo[idx].checked"
+        />
+        <span class="checkmark"></span>
+      </label>
       <input
         type="text"
-        class="todolist__title"
-        :value="allTodo.title"
+        :value="todo.todo[idx].description"
         disabled="disabled"
       />
-      <div
-        class="todo"
-        v-for="(i, idx) in allTodo.todo.slice(0, 2)"
-        :key="i.id"
-      >
-        <label class="checkbox-label">
-          <input
-            class="checkbox-input"
-            type="checkbox"
-            disabled="disabled"
-            :checked="allTodo.todo[idx].checked"
-          />
-          <span class="checkmark"></span>
-        </label>
-        <input
-          type="text"
-          :value="allTodo.todo[idx].description"
-          disabled="disabled"
-        />
-      </div>
-
-      <div class="todolist__buttons">
-        <router-link @click.native.prevent="clickTodo({name:'edit', id:allTodo.id})" tag="button" class="edit-todolist" to="/note">
-          <font-awesome-icon class="ic-edit" icon="edit" size="2x" />
-        </router-link>
-        <router-link @click.native.prevent="clickTodo({name:'del', id:allTodo.id})" tag="button" class="del-todolist" to="#">
-          <font-awesome-icon
-            class="ic-del"
-            icon="times"
-            size="2x"
-          />
-        </router-link>
-      </div>
     </div>
-    <div class="todolist empty" v-else></div>
+
+    <div class="todolist__buttons">
+      <router-link @click.native.prevent="clickTodo({name:'edit', id:todo.id})" tag="button" class="edit-todolist" to="/note">
+        <font-awesome-icon class="ic-edit" icon="edit" size="2x" />
+      </router-link>
+      <router-link @click.native.prevent="clickTodo({name:'del', id:todo.id})" tag="button" class="del-todolist" to="#">
+        <font-awesome-icon
+          class="ic-del"
+          icon="times"
+          size="2x"
+        />
+      </router-link>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "TodoList",
+  name: "todoList",
   props: {
-    allTodo: Object
+    todo: Object
   },
   methods: {
-    clickTodo(ev) {
+    /* clickTodo(ev) {
       this.$emit("clickTodo", ev);
-    }
+    } */
   }
 };
 </script>

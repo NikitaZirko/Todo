@@ -1,4 +1,4 @@
-@import "../variables";
+@import "../media";
 
 .todolist {
   margin-bottom: 20px;
@@ -146,5 +146,11 @@
     .del-todolist:hover {
       color: $select;
     }
+  }
+}
+
+.empty {
+  @include media-mobile {
+    display: none;
   }
 }
