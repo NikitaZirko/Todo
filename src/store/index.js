@@ -48,14 +48,23 @@ export default new Vuex.Store({
     SETTODOLIST(state, todoLists) {
       state.todoLists = todoLists;
     },
-    REMOVETODOLIST(state, id) {
-      Vue.delete(state.todoLists, id-1);
-      //or state.todoLists.splice((id-1), 1)
+    REMOVETODOLIST(state, idTodo) {
+      let filtered = state.todoLists.filter(function(todo) {
+        return todo.id == idTodo;
+      });
+      state.todoLists.splice((filtered), 1);
+    },
+    CREATETODOLIST(state, idTodo) {
+      console.log(state, idTodo)
+      /* `{id:${idTodo},title:"Название",todo:[{checked:false,description:"Пункт"}]}` */
     }
   },
   actions: {
-    del({commit}, id) {
-      commit("REMOVETODOLIST", id);
+    removeTodoList({ commit }, idTodo) {
+      commit("REMOVETODOLIST", idTodo);
+    },
+    createTodoList({ commit }, idTodo) {
+      commit("CREATETODOLIST", idTodo);
     }
   },
   getters: {

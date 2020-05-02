@@ -29,15 +29,21 @@
       </div>
 
       <div class="todolist__buttons">
-        <router-link @click.native.prevent="clickTodo({name:'edit', id:allTodo.id})" tag="button" class="edit-todolist" to="/note">
+        <router-link
+          @click.native.prevent="clickTodo({ name: 'edit', id: allTodo.id })"
+          tag="button"
+          class="edit-todolist"
+          to="/note"
+        >
           <font-awesome-icon class="ic-edit" icon="edit" size="2x" />
         </router-link>
-        <router-link @click.native.prevent="clickTodo({name:'del', id:allTodo.id})" tag="button" class="del-todolist" to="#">
-          <font-awesome-icon
-            class="ic-del"
-            icon="times"
-            size="2x"
-          />
+        <router-link
+          @click.native.prevent="clickTodo({ name: 'del', id: allTodo.id })"
+          tag="button"
+          class="del-todolist"
+          to="#"
+        >
+          <font-awesome-icon class="ic-del" icon="times" size="2x" />
         </router-link>
       </div>
     </div>

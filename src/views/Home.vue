@@ -11,14 +11,23 @@
         Мои заметки
       </h1>
       <p class="todolist__sup-title">Ваш персональный<br />помощник</p>
-      <router-link tag="button" class="add-todolist" to="/note">
+      <button @click="addTodolist" class="add-todolist" to="/note">
         <font-awesome-icon class="ic-add" icon="plus-circle" size="5x" />
-      </router-link>
+      </button>
       <template v-for="(i, idx) in getTodoListsLength">
-        <todoLists :allTodo="getTodoLists[idx]" :i="i" :key="i.id" @clickTodo="clickTodo($event)" />
+        <todoLists
+          :allTodo="getTodoLists[idx]"
+          :i="i"
+          :key="i.id"
+          @clickTodo="clickTodo($event)"
+        />
       </template>
     </div>
-    <app-modal v-show="showModal" @clickModal="clickModal($event)" @click.self.native="showModal = false">
+    <app-modal
+      v-show="showModal"
+      @clickModal="clickModal($event)"
+      @click.self.native="showModal = false"
+    >
       <template v-slot:title>
         ВЫ ДЕСТВИТЕЛЬНО ХОТИТЕ <span class="col-red">УДАЛИТЬ</span> ЗАМЕТКУ?
       </template>
@@ -46,17 +55,21 @@ export default {
       if (ev.name === "del") {
         this.showModal = true;
       } else if (ev.name === "edit") {
-        console.log("пупу")
+        console.log("пупу");
         // дополнить передачу id в vuex
       }
     },
     clickModal(ev) {
       if (ev === "yes") {
-        this.$store.dispatch("del", this.idTodoList);
+        this.$store.dispatch("removeTodoList", this.idTodoList);
         this.showModal = false;
       } else if (ev === "no") {
         this.showModal = false;
       }
+    },
+    addTodolist() {
+      this.$store.dispatch("createTodoList", this.getTodoLists.length + 1);
+      this.$router.push("/note");
     }
   },
   computed: {
@@ -67,7 +80,7 @@ export default {
       // if todolists > 5 add sceleton-blocks
       if (this.$store.getters["getTodoLists"].length < 5) {
         return 5;
-      // if todolists > 5 return Todolist length
+        // if todolists > 5 return Todolist length
       } else {
         return this.$store.getters["getTodoLists"].length;
       }

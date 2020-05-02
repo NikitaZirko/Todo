@@ -1,9 +1,13 @@
 <template>
   <div class="note">
     <h1 class="note__title">Редактировать заметку</h1>
-    <todoList :todo="getTodoLists" />
+    <todoList :editTodo="getTodoLists" @clickTodo="clickTodo($event)" />
 
-    <app-modal v-show="showModal" @clickModal="clickModal($event)" @click.self.native="showModal = false">
+    <app-modal
+      v-show="showModal"
+      @clickModal="clickModal($event)"
+      @click.self.native="showModal = false"
+    >
       <template v-slot:title>
         ВЫ ДЕСТВИТЕЛЬНО ХОТИТЕ <span class="col-red">УДАЛИТЬ</span> ЗАМЕТКУ?
       </template>
@@ -18,7 +22,8 @@ export default {
   name: "note",
   data() {
     return {
-      showModal: false
+      showModal: false,
+      idTodoList: null
     };
   },
   components: {
@@ -26,31 +31,32 @@ export default {
   },
   methods: {
     clickModal(ev) {
-      if (ev === "yes") {
+      if (ev.name === "yes") {
         this.$store.dispatch("del", this.idTodoList);
         this.showModal = false;
-      } else if (ev === "no") {
+      } else if (ev.name === "no") {
         this.showModal = false;
       }
-    }
-    /* clickTodo(ev) {
+    },
+    clickTodo(ev) {
       this.idTodoList = ev.id;
       if (ev.name === "del") {
         this.showModal = true;
-      } else if (ev.name === "edit") {
-        console.log("пупу")
+      } else if (ev.name === "save") {
+        console.log("пупу");
         // дополнить передачу id в vuex
       }
-    }, */
+    }
   },
   computed: {
     getTodoLists() {
-      return this.$store.getters["getTodoLists"][0];
+      let last = this.$store.getters["getTodoLists"].length - 1
+      return this.$store.getters["getTodoLists"][last];
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
- @import "../assets/styles/pages/note.scss";
+@import "../assets/styles/pages/note.scss";
 </style>

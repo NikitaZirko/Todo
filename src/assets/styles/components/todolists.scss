@@ -5,7 +5,7 @@
   padding: 20px;
   min-width: 300px;
   width: 300px;
-  min-height: 300px;
+  min-height: 326px;
   background-color: $todo-card;
   box-shadow: none;
 
@@ -32,9 +32,11 @@
       width: 100%;
       outline: none;
       border: none;
+      border-bottom: 2px solid $background;
       background-color: $background;
       font-size: 1.6rem;
       color: #a5a5a5;
+      transition: border 0.3s;
     }
 
     &>input[type=text]:focus {
