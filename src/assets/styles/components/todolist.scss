@@ -166,7 +166,7 @@
     }
   }
 
-  .add-todolist {
+  .add-todo {
     display: block;
     margin: 0 auto 30px;
     padding: 15px;
@@ -194,7 +194,7 @@
 
   .save-todolist:hover,
   .cancel-todolist:hover,
-  .add-todolist:hover,
+  .add-todo:hover,
   .del-todolist:hover {
     color: $select;
   }

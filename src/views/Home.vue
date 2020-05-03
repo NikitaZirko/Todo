@@ -11,9 +11,9 @@
         Мои заметки
       </h1>
       <p class="todolist__sup-title">Ваш персональный<br />помощник</p>
-      <button @click="addTodolist" class="add-todolist" to="/note">
-        <font-awesome-icon class="ic-add" icon="plus-circle" size="5x" />
-      </button>
+      <router-link class="add-todolist" to="/note">
+        <font-awesome-icon class="ic-add" icon="plus-circle" size="3x" />
+      </router-link>
       <template v-for="(i, idx) in getTodoListsLength">
         <todoLists
           :allTodo="getTodoLists[idx]"
@@ -67,10 +67,10 @@ export default {
         this.showModal = false;
       }
     },
-    addTodolist() {
+    /* addTodolist() {
       this.$store.dispatch("createTodoList", this.getTodoLists.length + 1);
       this.$router.push("/note");
-    }
+    } */
   },
   computed: {
     getTodoLists() {

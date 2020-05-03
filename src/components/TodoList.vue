@@ -1,29 +1,10 @@
 <template>
   <div class="todolist">
-    <input type="text" class="todolist__title" :value="editTodo.title" />
-    <button @click="addTodo" class="add-todolist" to="#">
+    <input type="text" class="todolist__title" v-model="title" />
+
+    <button @click="addTodo" class="add-todo" to="#">
       <font-awesome-icon class="ic-plus" icon="plus-circle" size="2x" />
     </button>
-    <div class="todo" v-for="(i, idx) in editTodo.todo" :key="i.id">
-      <label class="checkbox-label">
-        <input
-          class="checkbox-input"
-          type="checkbox"
-          :checked="editTodo.todo[idx].checked"
-        />
-        <span class="checkmark"></span>
-      </label>
-
-      <label class="text-label">
-        <font-awesome-icon
-          @click="delTodo"
-          class="ic-inputDel"
-          icon="times"
-          size="2x"
-        />
-        <input type="text" :value="editTodo.todo[idx].description" />
-      </label>
-    </div>
 
     <button
       @click="clickTodo({ name: 'del', id: editTodo.id })"
@@ -31,6 +12,27 @@
     >
       <font-awesome-icon class="ic-del" icon="times" size="2x" />
     </button>
+
+    <div class="todo" v-for="(i, idx) in todo" :key="i.id">
+      <label class="checkbox-label">
+        <input
+          class="checkbox-input"
+          type="checkbox"
+          v-model="todo[idx].checked"
+        />
+        <span class="checkmark"></span>
+      </label>
+
+      <label class="text-label">
+        <font-awesome-icon
+          @click="delTodo(idx)"
+          class="ic-inputDel"
+          icon="times"
+          size="2x"
+        />
+        <input type="text" ref="focus" v-model="todo[idx].description" @keyup.enter="addTodo" @change="valid(idx)"/>
+      </label>
+    </div>
 
     <div class="footer__buttons">
       <button
@@ -52,39 +54,66 @@
 <script>
 export default {
   name: "todoList",
-  // v model добавиииииииииииииииииииииииииииииииТЬ
-  /* data() {
+  data() {
     return {
       id: null,
-      title: null,
-      todo: [{
-        checked: null,
-        description: null,
-      }]
+      title: "Название",
+      todo: [
+        {
+          checked: false,
+          description: "nuasdsadll"
+        },
+        {
+          checked: false,
+          description: "nuasdsadll"
+        },
+        {
+          checked: false,
+          description: "nuasdsadll"
+        }
+      ]
     };
-  }, */
+  },
+  created() {
+    this.id = this.newTodolistId;
+  },
   props: {
     editTodo: Object
   },
   methods: {
-    newTodolist() {
+    /* pushNewTodolist() {
       const paramTodo = {
         id: this.id,
         title: this.title.trim(),
-        todo: [{
-          checked: this.checked,
-          description: this.description.trim()
-        }]
+        todo: this.todo
       }
-    },
+    }, */
     clickTodo(ev) {
       this.$emit("clickTodo", ev);
     },
     addTodo() {
-      console.log("create input");
+      if(this.$refs.focus[0].value === "") {
+        this.$refs.focus[0].focus()
+        return
+      }
+      this.todo.unshift({
+        checked: false,
+        description: ""
+      })
+      this.$refs.focus[0].focus()
     },
-    delTodo() {
-      console.log("delete input");
+    valid(idInput) {
+      if (event.target.value === "") {
+        this.delTodo(idInput)
+      }
+    },
+    delTodo(idInput) {
+      this.$delete(this.todo, idInput)
+    }
+  },
+  computed: {
+    newTodolistId() {
+      return (this.$store.getters["getTodoLists"].length + 2);
     }
   }
 };
