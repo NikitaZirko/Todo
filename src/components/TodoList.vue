@@ -36,7 +36,7 @@
 
     <div class="footer__buttons">
       <button
-        @click="clickTodo({ name: 'save', id: editTodo.id })"
+        @click="clickTodo({ name: 'save', json: newTodolist })"
         class="save-todolist"
       >
         <font-awesome-icon class="ic-check" icon="check" size="2x" />
@@ -81,13 +81,13 @@ export default {
     editTodo: Object
   },
   methods: {
-    /* pushNewTodolist() {
-      const paramTodo = {
+    newTodolist() {
+      return {
         id: this.id,
         title: this.title.trim(),
         todo: this.todo
       }
-    }, */
+    },
     clickTodo(ev) {
       this.$emit("clickTodo", ev);
     },
@@ -113,7 +113,7 @@ export default {
   },
   computed: {
     newTodolistId() {
-      return (this.$store.getters["getTodoLists"].length + 2);
+      return (this.$store.getters["getTodoLists"].length + 1);
     }
   }
 };

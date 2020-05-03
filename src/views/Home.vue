@@ -66,11 +66,7 @@ export default {
       } else if (ev === "no") {
         this.showModal = false;
       }
-    },
-    /* addTodolist() {
-      this.$store.dispatch("createTodoList", this.getTodoLists.length + 1);
-      this.$router.push("/note");
-    } */
+    }
   },
   computed: {
     getTodoLists() {

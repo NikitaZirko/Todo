@@ -1,7 +1,8 @@
 <template>
   <div class="note">
     <h1 class="note__title">Редактировать заметку</h1>
-    <todoList :editTodo="getTodoLists" @clickTodo="clickTodo($event)" />
+
+    <todoList @clickTodo="clickTodo($event)" />
 
     <app-modal
       v-show="showModal"
@@ -39,19 +40,14 @@ export default {
       }
     },
     clickTodo(ev) {
-      this.idTodoList = ev.id;
+      this.idTodoList = ev.json().id;
       if (ev.name === "del") {
         this.showModal = true;
       } else if (ev.name === "save") {
-        console.log("пупу");
-        // дополнить передачу id в vuex
+        // проверка на пустое поле input
+        this.$store.dispatch("createTodoList", ev.json());
+        this.$router.push('/')
       }
-    }
-  },
-  computed: {
-    getTodoLists() {
-      let last = this.$store.getters["getTodoLists"].length - 1
-      return this.$store.getters["getTodoLists"][last];
     }
   }
 };

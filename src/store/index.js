@@ -54,17 +54,18 @@ export default new Vuex.Store({
       });
       state.todoLists.splice((filtered), 1);
     },
-    CREATETODOLIST(state, idTodo) {
-      console.log(state, idTodo)
-      /* `{id:${idTodo},title:"Название",todo:[{checked:false,description:"Пункт"}]}` */
+    CREATETODOLIST(state, newTodo) {
+      console.log(state.todoLists)
+      state.todoLists.push(newTodo);
+      console.log(state.todoLists)
     }
   },
   actions: {
     removeTodoList({ commit }, idTodo) {
       commit("REMOVETODOLIST", idTodo);
     },
-    createTodoList({ commit }, idTodo) {
-      commit("CREATETODOLIST", idTodo);
+    createTodoList({ commit }, newTodo) {
+      commit("CREATETODOLIST", newTodo);
     }
   },
   getters: {
