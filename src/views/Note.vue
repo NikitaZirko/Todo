@@ -31,22 +31,24 @@ export default {
     TodoList
   },
   methods: {
-    clickModal(ev) {
-      if (ev.name === "yes") {
-        this.$store.dispatch("del", this.idTodoList);
-        this.showModal = false;
-      } else if (ev.name === "no") {
-        this.showModal = false;
-      }
-    },
     clickTodo(ev) {
+      // click on todolist
       this.idTodoList = ev.json().id;
       if (ev.name === "del") {
         this.showModal = true;
       } else if (ev.name === "save") {
-        // проверка на пустое поле input
         this.$store.dispatch("createTodoList", ev.json());
         this.$router.push('/')
+      }
+    },
+    clickModal(ev) {
+      // click on modal
+      if (ev === "yes") {
+        //this.$store.dispatch("del", this.idTodoList);
+        this.showModal = false;
+        this.$router.push('/')
+      } else if (ev === "no") {
+        this.showModal = false;
       }
     }
   }

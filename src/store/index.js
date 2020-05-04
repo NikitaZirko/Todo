@@ -55,9 +55,7 @@ export default new Vuex.Store({
       state.todoLists.splice((filtered), 1);
     },
     CREATETODOLIST(state, newTodo) {
-      console.log(state.todoLists)
       state.todoLists.push(newTodo);
-      console.log(state.todoLists)
     }
   },
   actions: {

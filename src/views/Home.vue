@@ -51,15 +51,17 @@ export default {
   },
   methods: {
     clickTodo(ev) {
+      // click on todolist
       this.idTodoList = ev.id;
       if (ev.name === "del") {
         this.showModal = true;
       } else if (ev.name === "edit") {
         console.log("пупу");
-        // дополнить передачу id в vuex
+        ///////////////
       }
     },
     clickModal(ev) {
+      // click on modal
       if (ev === "yes") {
         this.$store.dispatch("removeTodoList", this.idTodoList);
         this.showModal = false;

@@ -7,7 +7,7 @@
     </button>
 
     <button
-      @click="clickTodo({ name: 'del', id: editTodo.id })"
+      @click="clickTodo({ name: 'del', json: newTodolist })"
       class="del-todolist"
     >
       <font-awesome-icon class="ic-del" icon="times" size="2x" />
@@ -30,7 +30,7 @@
           icon="times"
           size="2x"
         />
-        <input type="text" ref="focus" v-model="todo[idx].description" @keyup.enter="addTodo" @change="valid(idx)"/>
+        <input type="text" ref="focus" v-model="todo[idx].description" @keyup.enter="addTodo" placeholder="введите текст"/>
       </label>
     </div>
 
@@ -42,7 +42,7 @@
         <font-awesome-icon class="ic-check" icon="check" size="2x" />
       </button>
       <button
-        @click="clickTodo({ name: 'cancel', id: editTodo.id })"
+        @click="clickTodo({ name: 'cancel', json: newTodolist })"
         class="cancel-todolist"
       >
         <font-awesome-icon class="ic-redo" icon="redo" size="2x" />
@@ -77,11 +77,9 @@ export default {
   created() {
     this.id = this.newTodolistId;
   },
-  props: {
-    editTodo: Object
-  },
   methods: {
     newTodolist() {
+      // data send in state
       return {
         id: this.id,
         title: this.title.trim(),
@@ -89,9 +87,14 @@ export default {
       }
     },
     clickTodo(ev) {
+      // click on todolist any button
+      if (this.$refs.focus[0].value === "") {
+        this.delTodo(0)
+      }
       this.$emit("clickTodo", ev);
     },
     addTodo() {
+      // add input
       if(this.$refs.focus[0].value === "") {
         this.$refs.focus[0].focus()
         return
@@ -102,12 +105,8 @@ export default {
       })
       this.$refs.focus[0].focus()
     },
-    valid(idInput) {
-      if (event.target.value === "") {
-        this.delTodo(idInput)
-      }
-    },
     delTodo(idInput) {
+      // delete input
       this.$delete(this.todo, idInput)
     }
   },

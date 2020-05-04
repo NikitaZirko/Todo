@@ -9,6 +9,12 @@
   background-color: $todo-card;
   box-shadow: none;
 
+  &:hover .todolist__buttons .edit-todolist {
+    animation: bounce 1.2s;
+    -webkit-animation: bounce 1.2s;
+    animation-fill-mode: forwards;
+  }
+
   .todolist__title {
     padding: 20px 0 35px 0;
     width: 100%;
@@ -59,7 +65,6 @@
       & .checkbox-input {
         position: absolute;
         opacity: 0;
-        cursor: pointer;
         height: 0;
         width: 0;
       }
@@ -70,6 +75,7 @@
         left: 0;
         height: 41px;
         width: 41px;
+        cursor: default;
       }
 
       .checkmark:after {
@@ -131,7 +137,7 @@
       cursor: pointer;
       color: #787878;
       transform: scale(1.4);
-      transition: color 0.1s;
+      transition: all 0.4s;
     }
 
     .del-todolist {
@@ -144,8 +150,8 @@
       z-index: 3;
     }
 
-    .edit-todolist:hover,
-    .del-todolist:hover {
+    .del-todolist:hover,
+    .edit-todolist:hover {
       color: $select;
     }
   }
@@ -154,5 +160,28 @@
 .empty {
   @include media-mobile {
     display: none;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1.4);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.4);
+  }
+}
+@-webkit-keyframes bounce {
+  0% {
+    transform: scale(1.4);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.4);
   }
 }
