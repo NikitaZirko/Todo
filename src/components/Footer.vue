@@ -1,7 +1,7 @@
 <template>
   <div class="footer">
     <h1 class="footer__title">Тестовое задание Vue js</h1>
-    <a class="footer__mail" href="mailto:nik.message@gmail.com">
+    <a class="footer__mail" href="mailto:nik.message@gmail.com" title="Hello">
       nik.message@gmail.com
     </a>
     <div class="social">

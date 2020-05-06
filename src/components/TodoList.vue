@@ -1,13 +1,14 @@
 <template>
   <div class="todolist">
-    <input type="text" class="todolist__title" v-model="title" />
+    <input type="text" class="todolist__title" v-model="title" placeholder="введите название заметки"/>
 
-    <button @click="addTodo" class="add-todo" to="#">
+    <button @click="addTodo" class="add-todo" to="#" title="Добавить пункт">
       <font-awesome-icon class="ic-plus" icon="plus-circle" size="2x" />
     </button>
 
     <button
-      @click="clickTodo({ name: 'del', json: newTodolist })"
+      title="Удалить заметку"
+      @click="clickTodo({ name: 'del', idTitleTodo: newTodolist })"
       class="del-todolist"
     >
       <font-awesome-icon class="ic-del" icon="times" size="2x" />
@@ -25,27 +26,35 @@
 
       <label class="text-label">
         <font-awesome-icon
+          title="Удалить пункт"
           @click="delTodo(idx)"
           class="ic-inputDel"
           icon="times"
           size="2x"
         />
-        <input type="text" ref="focus" v-model="todo[idx].description" @keyup.enter="addTodo" placeholder="введите текст"/>
+        <input
+          type="text"
+          ref="focus"
+          v-model.trim="todo[idx].description"
+          @keyup.enter="addTodo"
+          @keyup.delete="delTodo(idx)"
+          placeholder="введите текст"
+        />
       </label>
     </div>
 
     <div class="footer__buttons">
-      <button
-        @click="clickTodo({ name: 'save', json: newTodolist })"
+      <button title="Сохранить измененния"
+        @click="clickTodo({ name: 'save', idTitleTodo: newTodolist })"
         class="save-todolist"
       >
-        <font-awesome-icon class="ic-check" icon="check" size="2x" />
+        <font-awesome-icon icon="check" size="2x" />
       </button>
-      <button
-        @click="clickTodo({ name: 'cancel', json: newTodolist })"
+      <button title="Отменить измененния"
+        @click="clickTodo({ name: 'cancel', idTitleTodo: newTodolist })"
         class="cancel-todolist"
       >
-        <font-awesome-icon class="ic-redo" icon="redo" size="2x" />
+        <font-awesome-icon icon="redo" size="2x" />
       </button>
     </div>
   </div>
@@ -57,62 +66,64 @@ export default {
   data() {
     return {
       id: null,
-      title: "Название",
+      title: "",
       todo: [
         {
           checked: false,
-          description: "nuasdsadll"
-        },
-        {
-          checked: false,
-          description: "nuasdsadll"
-        },
-        {
-          checked: false,
-          description: "nuasdsadll"
+          description: ""
         }
       ]
     };
   },
   created() {
-    this.id = this.newTodolistId;
+    // check - create todolist or edit todolist
+    if (this.$route.query.id) {
+      [this.id, this.title, this.todo] = [this.getEditTodoList.id, this.getEditTodoList.title, this.getEditTodoList.todo]
+    } else {
+      this.id = this.getNewTodolistId;
+    }
   },
   methods: {
     newTodolist() {
-      // data send in state
+      // data for send in state
       return {
         id: this.id,
-        title: this.title.trim(),
+        title: this.title,
         todo: this.todo
-      }
+      };
     },
     clickTodo(ev) {
       // click on todolist any button
       if (this.$refs.focus[0].value === "") {
-        this.delTodo(0)
+        this.delTodo(0);
       }
       this.$emit("clickTodo", ev);
     },
     addTodo() {
       // add input
-      if(this.$refs.focus[0].value === "") {
-        this.$refs.focus[0].focus()
-        return
+      if (this.$refs.focus[0].value === "") {
+        this.$refs.focus[0].focus();
+        return;
       }
       this.todo.unshift({
         checked: false,
         description: ""
-      })
-      this.$refs.focus[0].focus()
+      });
+      this.$refs.focus[0].focus();
     },
     delTodo(idInput) {
       // delete input
-      this.$delete(this.todo, idInput)
+      this.$delete(this.todo, idInput);
     }
   },
   computed: {
-    newTodolistId() {
-      return (this.$store.getters["getTodoLists"].length + 1);
+    getNewTodolistId() {
+      // get length all todolists for push new todolist
+      return this.$store.getters["getTodoLists"].length + 1;
+    },
+    getEditTodoList() {
+      // get edit todolist
+      return this.$store.getters["getEditTodoList"](this.$route.query.id);
     }
   }
 };

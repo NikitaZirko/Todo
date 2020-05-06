@@ -8,10 +8,10 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
-library.add(fab)
-library.add(fas)
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-Vue.component('app-modal', Modal)
+library.add(fab);
+library.add(fas);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('app-modal', Modal);
 
 Vue.config.productionTip = false;
 

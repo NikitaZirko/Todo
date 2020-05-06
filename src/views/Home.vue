@@ -12,7 +12,7 @@
       </h1>
       <p class="todolist__sup-title">Ваш персональный<br />помощник</p>
       <router-link class="add-todolist" to="/note">
-        <font-awesome-icon class="ic-add" icon="plus-circle" size="3x" />
+        <font-awesome-icon class="ic-add" icon="plus-circle" size="3x" title="Добавить заметку" />
       </router-link>
       <template v-for="(i, idx) in getTodoListsLength">
         <todoLists
@@ -56,8 +56,7 @@ export default {
       if (ev.name === "del") {
         this.showModal = true;
       } else if (ev.name === "edit") {
-        console.log("пупу");
-        ///////////////
+        this.$router.push({path: "/note", query: {id: this.idTodoList}});
       }
     },
     clickModal(ev) {

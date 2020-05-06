@@ -12,6 +12,7 @@
         v-for="(i, idx) in allTodo.todo.slice(0, 2)"
         :key="i.id"
       >
+
         <label class="checkbox-label">
           <input
             class="checkbox-input"
@@ -29,22 +30,16 @@
       </div>
 
       <div class="todolist__buttons">
-        <router-link
-          @click.native.prevent="clickTodo({ name: 'edit', id: allTodo.id })"
-          tag="button"
-          class="edit-todolist"
-          to="/note"
+        <button
+          @click="$emit('clickTodo', { name: 'edit', id: allTodo.id })" class="edit-todolist" title="Редактировать"
         >
           <font-awesome-icon class="ic-edit" icon="edit" size="2x" />
-        </router-link>
-        <router-link
-          @click.native.prevent="clickTodo({ name: 'del', id: allTodo.id })"
-          tag="button"
-          class="del-todolist"
-          to="#"
+        </button>
+        <button
+          @click="$emit('clickTodo', { name: 'del', id: allTodo.id })" class="del-todolist" title="Удалить заметку"
         >
           <font-awesome-icon class="ic-del" icon="times" size="2x" />
-        </router-link>
+        </button>
       </div>
     </div>
     <div class="todolist empty" v-else></div>
@@ -56,11 +51,6 @@ export default {
   name: "todoLists",
   props: {
     allTodo: Object
-  },
-  methods: {
-    clickTodo(ev) {
-      this.$emit("clickTodo", ev);
-    }
   }
 };
 </script>

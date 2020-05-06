@@ -45,29 +45,41 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-    SETTODOLIST(state, todoLists) {
-      state.todoLists = todoLists;
+    CREATETODOLIST(state, newTodo) {
+      let newData = {
+        id: newTodo.id,
+        title: newTodo.title,
+        todo: newTodo.todo
+      }
+      // check - edit or create new todolist
+      let objEdit = state.todoLists.find(el => el.id == newTodo.id)
+
+      if (typeof objEdit === 'undefined') {
+        // data - new todolist
+        state.todoLists.push(newTodo);
+      } else {
+        // data - edit todolist
+        state.todoLists.splice((objEdit.id - 1), 1, newData)
+      }
     },
     REMOVETODOLIST(state, idTodo) {
-      let filtered = state.todoLists.filter(function(todo) {
-        return todo.id == idTodo;
-      });
-      state.todoLists.splice((filtered), 1);
-    },
-    CREATETODOLIST(state, newTodo) {
-      state.todoLists.push(newTodo);
+      let objDel = state.todoLists.find(el => el.id == idTodo)
+      state.todoLists.splice(objDel.id - 1, 1);
     }
   },
   actions: {
-    removeTodoList({ commit }, idTodo) {
-      commit("REMOVETODOLIST", idTodo);
-    },
     createTodoList({ commit }, newTodo) {
       commit("CREATETODOLIST", newTodo);
+    },
+    removeTodoList({ commit }, idTodo) {
+      commit("REMOVETODOLIST", idTodo);
     }
   },
   getters: {
-    getTodoLists: st => st.todoLists
+    getTodoLists: st => st.todoLists,
+    getEditTodoList: (st) => (id) => {
+      return st.todoLists.find(el => el.id == id)
+    }
   },
   modules: {}
 });
