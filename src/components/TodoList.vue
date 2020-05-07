@@ -5,6 +5,7 @@
       class="todolist__title"
       v-model="title"
       placeholder="введите название заметки"
+      autofocus
     />
 
     <button @click="addTodo" class="add-todo" to="#" title="Добавить пункт">
@@ -132,8 +133,8 @@ export default {
   },
   computed: {
     getNewTodolistId() {
-      // get length all todolists for push new todolist
-      return this.$store.getters["getTodoLists"].length + 1;
+      // get id for new todolist
+      return this.$store.getters["getNewTodolistId"] + 1;
     },
     getEditTodoList() {
       // get edit todolist

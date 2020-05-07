@@ -63,7 +63,7 @@ export default {
         this.$router.push("/");
       } else if (ev === "yes" && this.optModal === "cancel") {
         this.showModal = false;
-        this.$router.go();
+        this.$router.push({ path: "/" }); // or this.$router.go();
       } else {
         this.showModal = false;
       }

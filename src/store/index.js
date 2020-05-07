@@ -5,66 +5,41 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    todoLists: [
-      {
-        id: 1,
-        title: "Заметка 1",
-        todo: [
-          {
-            checked: true,
-            description: "Пункт 1"
-          },
-          {
-            checked: false,
-            description: "Пункт 2"
-          },
-          {
-            checked: true,
-            description: "Пункт 3"
-          }
-        ]
-      },
-      {
-        id: 2,
-        title: "Заметка 2",
-        todo: [
-          {
-            checked: true,
-            description: "Пункт 4"
-          },
-          {
-            checked: false,
-            description: "Пункт 5"
-          },
-          {
-            checked: true,
-            description: "Пункт 6"
-          }
-        ]
-      }
-    ]
+    todoLists: []
   },
   mutations: {
     CREATETODOLIST(state, newTodo) {
-      let newData = {
-        id: newTodo.id,
-        title: newTodo.title,
-        todo: newTodo.todo
-      }
-      // checking - edit or create new todolist
-      let objEdit = state.todoLists.find(el => el.id == newTodo.id)
+      let flag = true;
 
-      if (typeof objEdit === 'undefined') {
-        // data - new todolist
+      // checking - edit or create new todolist
+      state.todoLists.filter(function (el, i) {
+        if (el.id === newTodo.id) {
+          console.log(i  + "i")
+          console.log(newTodo.id + "newTodo.id")
+          console.log("edit")
+          // data - edit todolist
+          let newData = {
+            id: newTodo.id,
+            title: newTodo.title,
+            todo: newTodo.todo
+          }
+          state.todoLists.splice(i, 1, newData);
+          flag = false;
+        }
+      })
+
+      if (flag) {
+        // id - new todolist
+        console.log("newPush")
         state.todoLists.push(newTodo);
-      } else {
-        // data - edit todolist
-        state.todoLists.splice((objEdit.id - 1), 1, newData)
       }
     },
     REMOVETODOLIST(state, idTodo) {
-      let objDel = state.todoLists.find(el => el.id == idTodo)
-      state.todoLists.splice(objDel.id - 1, 1);
+      state.todoLists.filter((el, i) => {
+        if (el.id === idTodo) {
+          state.todoLists.splice(i, 1);
+        }
+      });
     }
   },
   actions: {
@@ -77,6 +52,14 @@ export default new Vuex.Store({
   },
   getters: {
     getTodoLists: st => st.todoLists,
+    getNewTodolistId: st => {
+      if (st.todoLists.length) {
+        return st.todoLists[st.todoLists.length-1].id;
+      } else {
+        console.log("ПЕРВЫЫЫЫЫЙ")
+        return 0
+      }
+    },
     getEditTodoList: (st) => (id) => {
       return st.todoLists.find(el => el.id == id)
     }
