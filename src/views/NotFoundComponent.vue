@@ -10,5 +10,5 @@
 </template>
 
 <style lang="scss" scoped>
- @import "../assets/styles/pages/error.scss";
+@import "../assets/styles/pages/error.scss";
 </style>

@@ -58,7 +58,7 @@
         background-color: $background;
         font-size: 1.6rem;
         color: #a5a5a5;
-        transition: border 0.3s;
+        transition: all 0.4s;
       }
 
       &>input[type=text]:focus {
@@ -198,6 +198,11 @@
   .del-todolist:hover {
     color: $select;
   }
+}
+
+.through {
+  text-decoration: line-through;
+  color: $select !important;
 }
 
 ::placeholder {

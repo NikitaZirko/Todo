@@ -64,8 +64,6 @@ export default {
       } else if (ev === "yes" && this.optModal === "cancel") {
         this.showModal = false;
         this.$router.go();
-        //this.$store.dispatch("createTodoList", this.idTodoList);
-        //this.$router.push("/");
       } else {
         this.showModal = false;
       }

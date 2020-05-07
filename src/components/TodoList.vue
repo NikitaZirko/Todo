@@ -1,6 +1,11 @@
 <template>
   <div class="todolist">
-    <input type="text" class="todolist__title" v-model="title" placeholder="введите название заметки"/>
+    <input
+      type="text"
+      class="todolist__title"
+      v-model="title"
+      placeholder="введите название заметки"
+    />
 
     <button @click="addTodo" class="add-todo" to="#" title="Добавить пункт">
       <font-awesome-icon class="ic-plus" icon="plus-circle" size="2x" />
@@ -37,20 +42,22 @@
           ref="focus"
           v-model.trim="todo[idx].description"
           @keyup.enter="addTodo"
-          @keyup.delete="delTodo(idx)"
           placeholder="введите текст"
+          :class="{through: todo[idx].checked}"
         />
       </label>
     </div>
 
     <div class="footer__buttons">
-      <button title="Сохранить измененния"
+      <button
+        title="Сохранить измененния"
         @click="clickTodo({ name: 'save', idTitleTodo: newTodolist })"
         class="save-todolist"
       >
         <font-awesome-icon icon="check" size="2x" />
       </button>
-      <button title="Отменить измененния"
+      <button
+        title="Отменить измененния"
         @click="clickTodo({ name: 'cancel', idTitleTodo: newTodolist })"
         class="cancel-todolist"
       >
@@ -76,9 +83,12 @@ export default {
     };
   },
   created() {
-    // check - create todolist or edit todolist
+    // checking - create todolist or edit todolist
     if (this.$route.query.id) {
-      [this.id, this.title, this.todo] = [this.getEditTodoList.id, this.getEditTodoList.title, this.getEditTodoList.todo]
+      let objEdit = JSON.parse(JSON.stringify(this.getEditTodoList));
+      this.id = objEdit.id;
+      this.title = objEdit.title;
+      this.todo = objEdit.todo;
     } else {
       this.id = this.getNewTodolistId;
     }
@@ -112,6 +122,10 @@ export default {
       this.$refs.focus[0].focus();
     },
     delTodo(idInput) {
+      // checking if last one input
+      if (typeof this.$refs.focus[1] === "undefined") {
+        return;
+      }
       // delete input
       this.$delete(this.todo, idInput);
     }

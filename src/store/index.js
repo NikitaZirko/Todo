@@ -51,7 +51,7 @@ export default new Vuex.Store({
         title: newTodo.title,
         todo: newTodo.todo
       }
-      // check - edit or create new todolist
+      // checking - edit or create new todolist
       let objEdit = state.todoLists.find(el => el.id == newTodo.id)
 
       if (typeof objEdit === 'undefined') {
