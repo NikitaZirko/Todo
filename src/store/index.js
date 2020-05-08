@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -10,27 +11,22 @@ export default new Vuex.Store({
   mutations: {
     CREATETODOLIST(state, newTodo) {
       let flag = true;
-
       // checking - edit or create new todolist
-      state.todoLists.filter(function (el, i) {
+      state.todoLists.filter(function(el, i) {
         if (el.id === newTodo.id) {
-          console.log(i  + "i")
-          console.log(newTodo.id + "newTodo.id")
-          console.log("edit")
           // data - edit todolist
           let newData = {
             id: newTodo.id,
             title: newTodo.title,
             todo: newTodo.todo
-          }
+          };
           state.todoLists.splice(i, 1, newData);
           flag = false;
         }
-      })
+      });
 
       if (flag) {
         // id - new todolist
-        console.log("newPush")
         state.todoLists.push(newTodo);
       }
     },
@@ -54,15 +50,15 @@ export default new Vuex.Store({
     getTodoLists: st => st.todoLists,
     getNewTodolistId: st => {
       if (st.todoLists.length) {
-        return st.todoLists[st.todoLists.length-1].id;
+        return st.todoLists[st.todoLists.length - 1].id;
       } else {
-        console.log("ПЕРВЫЫЫЫЫЙ")
-        return 0
+        return 0;
       }
     },
-    getEditTodoList: (st) => (id) => {
-      return st.todoLists.find(el => el.id == id)
+    getEditTodoList: st => id => {
+      return st.todoLists.find(el => el.id == id);
     }
   },
-  modules: {}
+  modules: {},
+  plugins: [createPersistedState()]
 });
