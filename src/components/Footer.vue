@@ -5,13 +5,13 @@
       nik.message@gmail.com
     </a>
     <div class="social">
-      <a class="social__item" href="#">
+      <a class="social__item" href="https://github.com/NikitaZirko/Todo">
         GitHub <font-awesome-icon :icon="['fab', 'github']" size="lg" />
       </a>
-      <a class="social__item" href="#">
+      <a class="social__item" href="https://bitbucket.org/zirkonikita/todo">
         Bitbucket <font-awesome-icon :icon="['fab', 'bitbucket']" size="lg" />
       </a>
-      <a class="social__item" href="#">
+      <a class="social__item" href="https://gitlab.com/NikitaZirko/todo">
         GitLab <font-awesome-icon :icon="['fab', 'gitlab']" size="lg" />
       </a>
     </div>
