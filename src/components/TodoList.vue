@@ -44,7 +44,7 @@
           v-model.trim="todo[idx].description"
           @keyup.enter="addTodo"
           placeholder="введите текст"
-          :class="{through: todo[idx].checked}"
+          :class="{ through: todo[idx].checked }"
         />
       </label>
     </div>

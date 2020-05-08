@@ -18,8 +18,7 @@ const routes = [
   {
     path: "/note",
     name: "Note",
-    component: () =>
-      import("../views/Note.vue")
+    component: () => import("../views/Note.vue")
   }
 ];
 

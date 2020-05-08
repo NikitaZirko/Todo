@@ -25,7 +25,7 @@
           type="text"
           :value="allTodo.todo[idx].description"
           disabled="disabled"
-          :class="{through: allTodo.todo[idx].checked}"
+          :class="{ through: allTodo.todo[idx].checked }"
         />
       </div>
 
