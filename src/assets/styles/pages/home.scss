@@ -8,6 +8,10 @@
   flex-wrap: wrap;
   justify-content: space-around;
 
+  @include media-mobile {
+    justify-content: center;
+  }
+
   .todolist__title {
     margin-bottom: 10px;
     padding-top: 60px;
