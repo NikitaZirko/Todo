@@ -39,9 +39,10 @@
     border: none;
     box-shadow: none;
     cursor: pointer;
-    @include media-tablet {
+
+    @include media-custom(600px) {
+      margin: 0 auto;
       height: 100px;
-      padding-bottom: 40px;
     }
 
     .ic-add {

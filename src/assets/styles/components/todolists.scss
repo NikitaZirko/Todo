@@ -21,7 +21,7 @@
     text-align: center;
     outline: none;
     border: none;
-    background-color: $todo-card;
+    background-color: transparent;
     font-size: 1.8rem;
     font-weight: 600;
     color: #787878;
@@ -132,7 +132,7 @@
 
     .edit-todolist {
       border: none;
-      background-color: $todo-card;
+      background-color: transparent;
       box-shadow: none;
       cursor: pointer;
       color: #787878;
@@ -141,7 +141,7 @@
 
     .del-todolist {
       border: none;
-      background-color: $todo-card;
+      background-color: transparent;
       box-shadow: none;
       cursor: pointer;
       color: #787878;

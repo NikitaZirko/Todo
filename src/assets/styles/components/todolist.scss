@@ -174,7 +174,7 @@
     background-color: $todo-card;
     box-shadow: none;
     cursor: pointer;
-    color: #787878;
+    color: #FF5722;
     transition: color 0.1s;
     z-index: 3;
   }
@@ -194,9 +194,12 @@
 
   .save-todolist:hover,
   .cancel-todolist:hover,
-  .add-todo:hover,
   .del-todolist:hover {
     color: $select;
+  }
+
+  .add-todo:hover {
+    color: #787878;
   }
 }
 

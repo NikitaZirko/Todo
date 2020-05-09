@@ -4,7 +4,7 @@
       type="text"
       class="todolist__title"
       v-model="title"
-      placeholder="введите название заметки"
+      placeholder="Введите название"
       autofocus
     />
 

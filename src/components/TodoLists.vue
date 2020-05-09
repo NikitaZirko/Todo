@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="todolist" v-if="allTodo || 0">
+    <div class="todolist" v-if="allTodo || 0" :style="{'background' : randomColors()}">
       <input
         type="text"
         class="todolist__title"
@@ -55,7 +55,37 @@ export default {
   name: "todoLists",
   props: {
     allTodo: Object
-  }
+  },
+  data() {
+    return {
+      colors: [
+        "antiquewhite",
+        "#defad7",
+        "#f1d7fa",
+        "#fff8c5",
+        "#dfe3ff",
+        "#dcffcc"
+
+      ]
+    }
+  },
+  methods: {
+    randomColors() {
+      function randomNoRepeats(arr) {
+        var copy = arr.slice(0);
+        return function() {
+          if (copy.length < 1) { copy = arr.slice(0); }
+          var i = Math.floor(Math.random() * copy.length);
+          var item = copy[i];
+          copy.splice(i, 1);
+          return item;
+        };
+      }
+
+      let chooser = randomNoRepeats(this.colors);
+      return chooser();
+    },
+  },
 };
 </script>
 
