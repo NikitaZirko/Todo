@@ -9,6 +9,9 @@
   min-height: 326px;
   background-color: $todo-card;
   box-shadow: none;
+  @include media-mobile {
+    justify-content: center;
+  }
 
   &:hover .todolist__buttons .edit-todolist {
     animation: 0.1s tremor ease-out 5;
