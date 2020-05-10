@@ -25,6 +25,7 @@
           :i="i"
           :key="i.id"
           @clickTodo="clickTodo($event)"
+          :style="randomColors()"
         />
       </template>
     </div>
@@ -48,7 +49,14 @@ export default {
   data() {
     return {
       showModal: false,
-      idTodoList: null
+      idTodoList: null,
+      colors: [
+        "#faebd7",
+        "#defad7",
+        "#f1d7fa",
+        "#fff8c5",
+        "#dfe3ff"
+      ]
     };
   },
   components: {
@@ -71,6 +79,26 @@ export default {
         this.showModal = false;
       } else if (ev === "no") {
         this.showModal = false;
+      }
+    },
+    oldColor(col = null) {
+      let prev = col;
+      return prev
+    },
+    randomColors() {
+      let i = Math.floor(Math.random() * this.colors.length);
+      let checkRepeat = () => {
+        if (this.oldColor === i) {
+          i = Math.floor(Math.random() * this.colors.length);
+          checkRepeat();
+        } else {
+          this.oldColor = i;
+        }
+      };
+      checkRepeat();
+      return {
+        background: this.colors[i],
+        marginBottom: "20px"
       }
     }
   },

@@ -2,12 +2,10 @@
 
 .todolist {
   position: relative;
-  margin-bottom: 20px;
   padding: 20px;
   min-width: 300px;
   width: 300px;
   min-height: 326px;
-  background-color: $todo-card;
   box-shadow: none;
 
   &:hover .todolist__buttons .edit-todolist {
@@ -162,6 +160,7 @@
 }
 
 .empty {
+  background-color: #ebebeb;
   @include media-mobile {
     display: none;
   }
